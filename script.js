@@ -11,7 +11,7 @@ var media_recorder = null;
 let videoStream = null;
 var blobs_recorded = [];
 
-function startWebCam() {
+function start() {
     if (navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({video: true})
                 .then(function (stream) {
@@ -62,7 +62,7 @@ function stopBroadcasting(){
 	clearInterval(broadcastingTimer);
 }
 
-function recording(){
+function startRecord(){
     media_recorder = new MediaRecorder(videoStream, { mimeType: 'video/webm' });
     media_recorder.addEventListener('dataavailable', function(e) {
 		blobs_recorded.push(e.data);
@@ -80,7 +80,7 @@ function recording(){
     media_recorder.start(1000);
 }
 
-function stopRecirding(){
+function stopRecord(){
     media_recorder.stop()
 }
 function download(dataurl, filename) {
